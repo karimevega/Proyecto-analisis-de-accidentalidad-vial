@@ -35,7 +35,7 @@ En las principales ciudades del país, los accidentes de tránsito son una de la
 - *ZooKeeper:* Coordinación de servicios distribuidos
 
 ## 🏗️ Arquitectura de la solucion en spark 
-
+![arquitectura](./docs/MODELO%20RELACIONAL.png)  
 
 ### Procesamiento en Batch
 1. Carga del dataset desde HDFS
