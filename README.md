@@ -75,23 +75,21 @@ su - hadoop
 # Password: hadoop
 
 # Iniciar el clúster de Hadoop
-```start-all.sh
-```
+start-all.sh
+
 
 #### 1.2 Crear directorio en HDFS y cargar dataset
 bash
 # Crear carpeta en HDFS
-```hdfs dfs -mkdir /AccidentalidadVial
-```
+hdfs dfs -mkdir /AccidentalidadVial
 # Descargar el dataset
-```wget -O accidentalidad_barranquilla.csv https://www.datos.gov.co/api/views/yb9r-2dsi/rows.csv
-```
+wget -O accidentalidad_barranquilla.csv https://www.datos.gov.co/api/views/yb9r-2dsi/rows.csv
 # Copiar al HDFS
-```hdfs dfs -put accidentalidad_barranquilla.csv /AccidentalidadVial
-```
+hdfs dfs -put accidentalidad_barranquilla.csv /AccidentalidadVial
+
 # Verificar
-```hdfs dfs -ls /AccidentalidadVial
-```
+hdfs dfs -ls /AccidentalidadVial
+
 
 ### Paso 2: Procesamiento en Batch
 bash
@@ -99,8 +97,8 @@ bash
 # Password: bigdata
 
 # Ejecutar análisis en batch
-```python3 analisis_accidentalidad.py
-```
+python3 analisis_accidentalidad.py
+
 
 *Resultados del análisis batch:*
 - Esquema del dataset
@@ -116,35 +114,32 @@ bash
 #### 3.1 Iniciar ZooKeeper y Kafka
 
 *Terminal 1 - ZooKeeper:*
-```bash
+bash
 sudo /opt/Kafka/bin/zookeeper-server-start.sh /opt/Kafka/config/zookeeper.properties
-```
+
 
 *Terminal 2 - Kafka:*
-```bash
+bash
 sudo /opt/Kafka/bin/kafka-server-start.sh /opt/Kafka/config/server.properties
-```
+
 
 #### 3.2 Crear topic de Kafka
 *Terminal 3:*
-```bash
+bash
 /opt/Kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic accidentes_tiempo_real
-```
 # Verificar
-```/opt/Kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
-```
+/opt/Kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
 
 #### 3.3 Ejecutar Productor
 *Terminal 4:*
 bash
-```python3 kafka_producer_accidentes.py
-```
+python3 kafka_producer_accidentes.py
 
 #### 3.4 Ejecutar Consumidor con Spark Streaming
 *Terminal 5:*
 bash
-```spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3 spark_streaming_consumer_accidentes.py
-```
+spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3 spark_streaming_consumer_accidentes.py
 
 ### Paso 4: Monitorear la ejecución
 #### Interfaces Web:
