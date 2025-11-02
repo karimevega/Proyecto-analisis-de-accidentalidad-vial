@@ -6,7 +6,7 @@ from pyspark.sql.functions import col, count, avg, desc, hour, to_timestamp
 spark = SparkSession.builder.appName('AnalisisAccidentalidadVial').getOrCreate()
 
 # Define la ruta del archivo .csv en HDFS
-file_path = 'hdfs://localhost:9000/AccidentalidadVial/accidentalidad_barranquilla.csv'
+file_path = 'hdfs://localhost:9000/AccidentalidadVial/accidentalidad.csv'
 
 # Lee el archivo .csv
 df = spark.read.format('csv').option('header','true').option('inferSchema', 'true').load(file_path)
